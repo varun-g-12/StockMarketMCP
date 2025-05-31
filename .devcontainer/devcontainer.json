@@ -1,0 +1,20 @@
+{
+	"name": "TradingViewMCPServer",
+	"image": "python:3.12-slim-bookworm",
+	"features": {
+		"ghcr.io/devcontainers/features/git:1": {},
+		"ghcr.io/devcontainers/features/node:1": {}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-python.black-formatter",
+				"GitHub.copilot",
+				"GitHub.copilot-chat",
+				"ms-python.vscode-pylance",
+				"ms-python.python",
+				"ms-python.debugpy"
+			]
+		}
+	}
+}

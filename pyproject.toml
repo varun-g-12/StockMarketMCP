@@ -1,0 +1,19 @@
+[project]
+name = "mcp-server"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Varun G",email = "varungangu1@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+]
+
+[tool.poetry]
+packages = [{include = "mcp_server", from = "src"}]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
