@@ -1,6 +1,6 @@
 from datetime import datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, Hashable
 
 import pandas as pd
 import requests
@@ -164,6 +164,33 @@ def get_stock_recommendations() -> str:
         )
     except:
         raise TradingviewError("Unable to fetch the data from tradingview")
+
+
+@mcp.tool()
+def check_stock_values(tickers: list[str]) -> dict[Hashable, Any]:
+    """
+    Retrieve stock values for specified ticker symbols.
+
+    Args:
+        tickers (list[str]): List of stock ticker symbols to look up
+
+    Returns:
+        dict[Hashable, Any]: Dictionary containing filtered stock data for the
+                           specified tickers, converted from DataFrame format
+
+    Raises:
+        TradingviewError: If unable to load or process the stock data file
+
+    Note:
+        This function loads data from DATA_EXPORT_PATH and filters it based on
+        the 'name' column matching the provided ticker symbols.
+    """
+    try:
+        df: pd.DataFrame = _load_df(DATA_EXPORT_PATH)
+        df_filtered: pd.DataFrame = df[df["name"].isin(tickers)]  # type: ignore
+        return df_filtered.to_dict()  # type: ignore
+    except:
+        raise TradingviewError("Unable to find the stock values")
 
 
 if __name__ == "__main__":
