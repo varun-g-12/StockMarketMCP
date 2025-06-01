@@ -1,1 +1,3 @@
 .venv/
+tempDir/
+src/mcp_server/__pycache__/
