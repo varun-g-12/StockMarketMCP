@@ -11,9 +11,10 @@ from mcp_server.constant_variables import COLUMNS, DATA, HEADERS, PARAMS, SCANNE
 
 mcp = FastMCP("Tradingview_mcp")
 
-DATA_EXPORT_PATH: Path = (
-    Path("src/tempDir") / f"{datetime.now().date().strftime("%Y-%m-%d")}.csv"
-)
+DATA_EXPORT_DIR = Path("src/tempDir")
+DATA_EXPORT_DIR.mkdir(parents=True, exist_ok=True)  # <-- ensure directory exists
+
+DATA_EXPORT_PATH = DATA_EXPORT_DIR / f"{datetime.now().date().strftime('%Y-%m-%d')}.csv"
 
 
 class TradingviewError(Exception):
@@ -131,7 +132,6 @@ def _load_df(path: Path) -> pd.DataFrame:
         using the DataFrame structure from _create_response_df().
     """
     if not path.exists():
-        path.mkdir(exist_ok=False)
         df: pd.DataFrame = _create_response_df()
         df.to_csv(path, index=False)
         return df
